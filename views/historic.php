@@ -96,9 +96,23 @@ $userHistory = $_SESSION['user_history'] ?? [];
 
                 </table>
 
+                <div classe="col-12 d-flex justify-content-center">
+                    <form action="../controllers/invoicePDF_controller.php" method="post">
+                        <input type="hidden" name="order" value="<?= $orderId ?>">
+                        <input class="btn btn-success "type="submit" value="Generar Factura PDF">
+                    </form>
+
+                </div>
+
             </div>
 
-        <?php endforeach; ?>
+        <?php 
+
+        echo "<pre>";
+        print_r($userHistory);
+        echo "</pre>";
+    
+    endforeach; ?>
 
     <?php endif; ?>
 
