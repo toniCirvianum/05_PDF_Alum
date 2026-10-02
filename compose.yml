@@ -1,7 +1,5 @@
 services:
   php:
-    image: php:8.5-apache-trixie
-
     build: .
 
     volumes:
@@ -9,3 +7,15 @@ services:
 
     ports:
       - 8081:80
+    
+    command: >
+      bash -c "
+      if [ ! -f composer.json ]; then
+        composer require dompdf/dompdf;
+      else
+        composer install;
+      fi;
+      chown -R www-data:www-data /var/www/html/public/images;
+      chmod -R 775 /var/www/html/public/images;
+      apache2-foreground
+      "
